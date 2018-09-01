@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[8]:
+# In[11]:
 
 
 import os
@@ -26,14 +26,13 @@ with open(PyBank_csv) as csvfile:
         if Total_Months > 0:
             net_change = int(row[1]) - prev_value
             Total_Change = Total_Change + (int(row[1]) - prev_value)
+            if net_change > Greatest_Increase_in_Profits:
+                Greatest_Increase_in_Profits = net_change
+                Greatest_Increase_Month = row[0]
+            if net_change < Greatest_Decrease_in_Profits:
+                Greatest_Decrease_in_Profits = net_change
+                Greatest_Decrease_Month = row[0]
         prev_value = int(row[1])
-        if net_change > Greatest_Increase_in_Profits:
-            Greatest_Increase_in_Profits = net_change
-            Greatest_Increase_Month = row[0]
-        if net_change < Greatest_Decrease_in_Profits:
-            Greatest_Decrease_in_Profits = net_change
-            Greatest_Decrease_Month = row[0]
-
         Total_Months = Total_Months + 1
         Total_Net_Amount = Total_Net_Amount + int(row[1])
     Average_Change = Total_Change/(Total_Months-1)
